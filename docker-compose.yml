@@ -1,0 +1,11 @@
+services:
+  investment-crew:
+    build: .
+    image: investment-crew:latest
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src
+    command: [ "--stock", "TSLA" ] # Default stock for compose testing
+
+# Future steps can add Redis for caching or Postgres for logging

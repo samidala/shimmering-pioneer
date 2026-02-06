@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+.env
+
+# Poetry
+poetry.lock
+.pytest_cache/
+
+# Docker/System
+.DS_Store
+.git/
+.gitignore
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Artifacts
+README.md
+tests/

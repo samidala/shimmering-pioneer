@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "investment-crew.fullname" . }}
+  labels:
+    {{- include "investment-crew.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "investment-crew.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "investment-crew.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "investment-crew.fullname" . }}-secrets
+                  key: openai-api-key
+            - name: SERPER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "investment-crew.fullname" . }}-secrets
+                  key: serper-api-key
+          args: ["--stock", "{{ .Values.config.stockSymbol }}"]

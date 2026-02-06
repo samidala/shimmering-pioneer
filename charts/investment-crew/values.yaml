@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: investment-crew
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+config:
+  stockSymbol: "AAPL"
+
+secrets:
+  openaiApiKey: ""
+  serperApiKey: ""

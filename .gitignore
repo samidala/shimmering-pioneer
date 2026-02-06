@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+.env
+
+# Poetry
+poetry.lock
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+
+# System
+.DS_Store
+.history/
+.gemini/
+.agent/
+brain/

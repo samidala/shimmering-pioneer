@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: investment-crew
+  labels:
+    app: investment-crew
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: investment-crew
+  template:
+    metadata:
+      labels:
+        app: investment-crew
+    spec:
+      containers:
+        - name: investment-crew
+          image: investment-crew:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: investment-crew-secrets
+                  key: openai-api-key
+            - name: SERPER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: investment-crew-secrets
+                  key: serper-api-key
+          args: ["--stock", "AAPL"]
