@@ -57,5 +57,13 @@ investment_crew/
 - [ ] **Step 5**: Implement Kubernetes/Helm charts.
 - [ ] **Step 6**: Infrastructure as Code (Terraform/CDK).
 
+## ⚠️ Troubleshooting
+If you encounter a `TOMLError` (e.g., `Unexpected character: u'.'`) during `poetry install`, it is likely due to a minor bug in `pybase64` dependencies on some macOS versions. 
+
+**Fix**: Install dependencies directly into your virtualenv:
+```bash
+poetry run pip install "crewai[tools]" langchain-google-genai pydantic-settings yfinance python-dotenv
+```
+
 ## 📄 License
 MIT
