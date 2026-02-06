@@ -1,5 +1,5 @@
 import yfinance as ticker
-from crewai_tools import tool
+from crewai.tools import tool
 import logging
 
 logger = logging.getLogger(__name__)

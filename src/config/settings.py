@@ -5,9 +5,9 @@ import logging
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8', extra='ignore')
 
-    # LLM Configuration
-    OPENAI_API_KEY: Optional[str] = None
-    OPENAI_MODEL_NAME: str = "gpt-4o"
+    # Gemini Configuration
+    GEMINI_API_KEY: Optional[str] = None
+    GEMINI_MODEL_NAME: str = "gemini-1.5-flash"
     
     # Tool Configuration
     SERPER_API_KEY: Optional[str] = None

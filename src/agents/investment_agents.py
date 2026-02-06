@@ -1,9 +1,19 @@
 from crewai import Agent
 from src.tools.finance_tools import fetch_stock_financials, fetch_stock_history
+from src.config.settings import settings
 from crewai_tools import SerperDevTool
+from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 
 class InvestmentAgents:
+    def __init__(self):
+        self.gemini_llm = ChatGoogleGenerativeAI(
+            model=settings.GEMINI_MODEL_NAME,
+            verbose=True,
+            temperature=0.5,
+            google_api_key=settings.GEMINI_API_KEY
+        )
+
     def fundamental_analyst(self) -> Agent:
         return Agent(
             role="Fundamental Analyst",
@@ -12,6 +22,7 @@ class InvestmentAgents:
             in valuing companies. You look at balance sheets, cash flows, and revenue growth. 
             Your reports are data-driven and avoid hype.""",
             tools=[fetch_stock_financials, SerperDevTool()],
+            llm=self.gemini_llm,
             verbose=True,
             allow_delegation=False
         )
@@ -24,6 +35,7 @@ class InvestmentAgents:
             You use historical price data and volume to predict future movements. 
             You are quick to spot breakouts and reversals.""",
             tools=[fetch_stock_history],
+            llm=self.gemini_llm,
             verbose=True,
             allow_delegation=False
         )
@@ -36,6 +48,7 @@ class InvestmentAgents:
             fear and greed drive markets. You monitor headlines and social trends to see if 
             the market is overly optimistic or pessimistic about a stock.""",
             tools=[SerperDevTool()],
+            llm=self.gemini_llm,
             verbose=True,
             allow_delegation=False
         )
@@ -47,6 +60,7 @@ class InvestmentAgents:
             backstory="""You are the ultimate decision-maker. You take the detailed reports from 
             your fundamental, technical, and sentiment analysts and resolve any conflicting 
             viewpoints to provide a clear Buy, Sell, or Hold rating with a detailed rationale.""",
+            llm=self.gemini_llm,
             verbose=True,
             allow_delegation=True
         )

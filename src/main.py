@@ -63,8 +63,8 @@ def main():
     parser.add_argument("--stock", type=str, required=True, help="Stock symbol (e.g., AAPL)")
     args = parser.parse_args()
 
-    if not settings.OPENAI_API_KEY:
-        logger.error("OPENAI_API_KEY is missing. Please set it in your .env file.")
+    if not settings.GEMINI_API_KEY:
+        logger.error("GEMINI_API_KEY is missing. Please set it in your .env file.")
         return
 
     try:
