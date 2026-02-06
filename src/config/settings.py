@@ -7,7 +7,7 @@ class Settings(BaseSettings):
 
     # Gemini Configuration
     GEMINI_API_KEY: Optional[str] = None
-    GEMINI_MODEL_NAME: str = "gemini-1.5-flash"
+    GEMINI_MODEL_NAME: str = "gemini-flash-latest"
     
     # Tool Configuration
     SERPER_API_KEY: Optional[str] = None
